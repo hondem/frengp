@@ -1,0 +1,52 @@
+{block title}Úprava obrázku{/block}
+{block content}
+    <div class="container">
+        <div class="row x_title">
+            <div class="col-md-6">
+                <h3>Úprava obrázku</h3>
+            </div>
+        </div>
+
+        <div class="navbar navbar-default">
+            <ul class="nav navbar-nav">
+                <li><a n:href="Gallery:showFolder $image['folderId']"><span class="glyphicon glyphicon-backward"></span> Zpět</a></li>
+                <li><a href="#" type="button" data-toggle="modal" data-target="#deleteFolder"><span class="glyphicon glyphicon-trash"></span> Smazat fotku</a></li>
+            </ul>
+        </div>
+        <br>
+        
+        <div class="col-md-6">
+            <img src="{$basePath}{$image['url']}" class="img-responsive">
+        </div>
+        
+        <div class="col-md-6">
+            <form n:name="editImageForm">
+                <div class="form-group">
+                    <label for="title">Popis</label>
+                    <input n:name="description" type="text" class="form-control" id="title" placeholder="Popisek">
+                </div>
+
+                <button n:name="send" type="submit" class="btn btn-default">Uložit</button>
+            </form>
+        </div>
+        
+    </div>
+
+    <div class="modal fade" id="deleteFolder" tabindex="-1" role="dialog" aria-labelledby="deleteFolder">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Odstranit fotku</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Opravdu si přejete nenávratně odstranit fotku?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+                    <a n:href="Gallery:deleteImage $image['id']" class="btn btn-danger">Odstranit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}

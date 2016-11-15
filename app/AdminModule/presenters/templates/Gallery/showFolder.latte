@@ -1,0 +1,127 @@
+{block title}{$folder['name']}{/block}
+{block content}
+    <div class="container">
+        
+        <div class="row x_title">
+            <div class="col-md-6">
+                <h3>{$folder['name']}</h3>
+            </div>
+        </div>
+
+        <div class="navbar navbar-default">
+            <ul class="nav navbar-nav">
+                <li><a href="#" type="button" data-toggle="modal" data-target="#addPhotos"><span class="glyphicon glyphicon-plus"></span> Přidat fotografie</a></li>
+                <li><a href="#" type="button" data-toggle="modal" data-target="#editFolder"><span class="glyphicon glyphicon-pencil"></span> Upravit složku</a></li>
+                <li><a href="#" type="button" data-toggle="modal" data-target="#deleteFolder"><span class="glyphicon glyphicon-trash"></span> Smazat složku</a></li>
+            </ul>
+        </div>
+        <br>
+        
+        <table class="table table-striped">
+            <tr>
+                <td>Obrázek</td>
+                <td>Popisek</td>
+                <td>Odstranit</td>
+                <td>Upravit</td>
+            </tr>
+            <tr n:foreach="$files as $row">
+                <td><img src="{$basePath}{$row['thumbUrl']}" class="img-responsive" style="max-width:100px;"></td>
+                <td>{$row['description']}</td>
+                <td><a href="#" type="button" data-toggle="modal" data-target="#deleteImage-{$row['id']}"><span class="glyphicon glyphicon-trash"></span></a></td>
+                <td><a n:href="Gallery:editImage $row['id']"><span class="glyphicon glyphicon-pencil"></span></a></td>
+            </tr>
+        </table>
+    </div>
+                
+    <div class="modal fade" id="deleteFolder" tabindex="-1" role="dialog" aria-labelledby="addFolder">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Odstranit složku</h4>
+                    </div>
+                
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <p>Opravdu si přejete nenávratně odstranit tuto složku včetně veškerého jejího obsahu?</p>
+                        </div>
+                    </div>
+                
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+                        <a n:href="Gallery:deleteFolder $folder['id']" class="btn btn-danger">Odstranit</a>
+                    </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="editFolder" tabindex="-1" role="dialog" aria-labelledby="editFolder">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form n:name="editFolderForm" >
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Upravit složku</h4>
+                    </div>
+                
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input n:name="name" class="form-control">
+                        </div>
+                    </div>
+                
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+                        <button type="submit" class="btn btn-primary">Uložit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+            
+    <div class="modal fade" id="addPhotos" tabindex="-1" role="dialog" aria-labelledby="addPhotos">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form n:name="addPhotosForm" >
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Přidat obrázky</h4>
+                    </div>
+                
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input n:name="files" class="form-control">
+                        </div>
+                    </div>
+                
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+                        <button type="submit" class="btn btn-primary">Nahrát</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    {foreach $files as $row}
+        <div class="modal fade" id="deleteImage-{$row['id']}" tabindex="-1" role="dialog" aria-labelledby="deleteImage">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Odstranit fotku</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Opravdu si přejete nenávratně odstranit fotku?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+                        <a n:href="Gallery:deleteImage $row['id']" class="btn btn-danger">Odstranit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {/foreach}
+{/block}

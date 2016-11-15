@@ -1,0 +1,22 @@
+{block title}Galérie{/block}
+{block content}
+<div class="container">
+    <div class="row x_title">
+        <div class="col-md-6">
+            <h3>Galérie <small>Zde můžete spravovat galérie</small></h3>
+        </div>
+    </div>
+    <br>
+
+    <table class="table table-striped">
+        <tr>
+            <td>#</td>
+            <td>Název</td>
+        </tr>
+        <tr n:foreach="$gallerys as $row">
+            <td>{$row['id']}</td>
+            <td><a n:href="Gallery:showGallery $row['id']">{$row['name']}</a></td>
+        </tr>
+    </table>
+</div>
+{/block}

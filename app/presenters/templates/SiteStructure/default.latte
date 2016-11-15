@@ -1,0 +1,24 @@
+{block title}Mapa stránek{/block}
+{block content}
+<ul>
+{foreach $menu as $row}
+    {if $row['params'] == ''}
+        <li><a n:href="$row['presenter']">{$row['name']}</li>
+    {else}
+        <li><a n:href="$row['presenter'] $row['params']">{$row['name']}</li>
+    {/if}
+    
+    {ifset $row['subMenu'][0]}
+        <ul>
+            {foreach $row['subMenu'] as $subMenu}
+                {if $subMenu['params'] == ''}
+                    <li><a n:href="$subMenu['presenter']">{$subMenu['name']}</li>
+                {else}
+                    <li><a n:href="$subMenu['presenter'] $subMenu['params']">{$subMenu['name']}</li>
+                {/if}
+            {/foreach}
+        </ul>
+    {/ifset}
+{/foreach}
+</ul>
+{/block}

@@ -1,0 +1,85 @@
+{block title}Stránky{/block}
+{block content}
+<div class="container">
+    <div class="row x_title">
+        <div class="col-md-6">
+            <h3>Stránky <small>Zde můžete přidávat a upravovat stránky</small></h3>
+        </div>
+    </div>
+    
+    <!--
+    <div>
+        <a n:href="Pages:add" class="btn btn-default"><i class="fa fa-plus"></i> Přidat stránku</a>
+    </div>
+    -->
+    
+    {if $user->isInRole('admin')}
+        <h4>Neschválené úpravy</h4>
+        <hr>
+        <table class="table table-striped">
+            <tr>
+                <td>#</td>
+                <td>Název stránky</td>
+                <td>Datum poslední změny</td>
+                <td>Upravil</td>
+                <td>Editovat</td>
+            </tr>
+            <tr n:foreach="$editedPages as $page">
+                <td>{$page['id']}</td>
+                <td><a n:href="Pages:editedPage $page['pageId']">{$page['pageName']}</a></td>
+                <td>{$page['date']|date:'d. m. Y v H:i'}</td>
+                <td>{$page['editedByName']}</td>
+                <td><a n:href="Pages:editedPage $page['id']"><span class="fa fa-pencil"></span></a></td>
+            </tr>
+        </table>
+        
+        <h4>Schválené stránky</h4>
+        <hr>
+    {/if}
+    
+    <table class="table table-striped">
+        <tr>
+            <td>#</td>
+            <td>Název stránky</td>
+            <td>Datum poslední změny</td>
+            <td>Upravil</td>
+            <td>Editovat</td>
+        </tr>
+        {foreach $pages as $page}
+            <tr>
+                <td>{$page['id']}</td>
+                <td><a n:href="Pages:editPage $page['id']">{$page['pageName']}</a></td>
+                <td>{$page['date']|date:'d. m. Y v H:i'}</td>
+                <td>{$page['editedByName']}</td>
+                <td><a n:href="Pages:editPage $page['id']"><span class="fa fa-pencil"></span></a></td>
+            </tr>
+        {/foreach}
+    </table>
+    
+    {if $paginator->getPageCount() > 1}
+        <nav class="text-center">
+            <ul class="pagination">
+                {if !$paginator->isFirst()}
+                <li>
+                    <a n:href="Pages:default $paginator->getPage() - 1" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {/if}
+
+                {for $i=1; $i <= $paginator->getLastPage(); $i++}
+                    <li><a n:href="Pages:default $i">{$i}</a></li>
+                {/for}
+
+                {if !$paginator->isLast()}
+                <li>
+                    <a n:href="Pages:default $paginator->getPage() + 1" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {/if}
+            </ul>
+        </nav>
+    {/if}
+</div>
+{/block}

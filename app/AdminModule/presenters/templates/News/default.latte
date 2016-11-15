@@ -1,0 +1,104 @@
+{block title}Novinky{/block}
+{block content}
+<div class="container">
+    <div class="row x_title">
+        <div class="col-md-6">
+            <h3>Novinky <small>Zde můžete přidávat a editovat novinky</small></h3>
+        </div>
+    </div>
+    
+    <div class="navbar navbar-default">
+        <ul class="nav navbar-nav">
+            <li><a n:href="News:add"><i class="fa fa-plus"></i> Přidat novinku</a></li>
+        </ul>
+    </div>
+    <br>
+    
+    {if $user->isInRole('user')}
+        <table class="table table-striped">
+            <tr>
+                <td>#</td>
+                <td>Titulek</td>
+                <td>Autor</td>
+                <td>Upraveno</td>
+                <td>Schváleno</td>
+            </tr>
+
+            {foreach $news as $article}
+                <tr>
+                    <td>{$article['id']}</td>
+                    <td><a n:href="News:showNews $article['id']">{$article['title']}</a></td>
+                    <td>{$article['authorName']}</td>
+                    <td>{$article['date']|date:'d. m. Y v H:i'}</td>
+                    <td>{if $article['approved'] == 0}<span class="glyphicon glyphicon-remove"></span>{else}<span class="glyphicon glyphicon-ok"></span>{/if}</td>
+                </tr>
+            {/foreach}
+        </table>
+    {elseif $user->isInRole('admin')}
+        
+        <h4>Neschválené úpravy</h4>
+        <hr>
+        <table class="table table-striped">
+            <tr>
+                <td>#</td>
+                <td>Titulek</td>
+                <td>Autor</td>
+                <td>Upraveno</td>
+            </tr>
+
+            {foreach $editations as $article}
+                <tr>
+                    <td>{$article['id']}</td>
+                    <td><a n:href="News:showNews $article['newsId']">{$article['title']}</a></td>
+                    <td>{$article['authorName']}</td>
+                    <td>{$article['date']|date:'d. m. Y v H:i'}</td>
+                </tr>
+            {/foreach}
+        </table>
+        
+        <h4>Neschválené příspěvky</h4>
+        <hr>
+        <table class="table table-striped">
+            <tr>
+                <td>#</td>
+                <td>Titulek</td>
+                <td>Autor</td>
+                <td>Upraveno</td>
+                <td>Schváleno</td>
+            </tr>
+
+            {foreach $unApprovedNews as $article}
+                <tr>
+                    <td>{$article['id']}</td>
+                    <td><a n:href="News:showNews $article['id']">{$article['title']}</a></td>
+                    <td>{$article['authorName']}</td>
+                    <td>{$article['date']|date:'d. m. Y v H:i'}</td>
+                    <td>{if $article['approved'] == 0}<span class="glyphicon glyphicon-remove"></span>{else}<span class="glyphicon glyphicon-ok"></span>{/if}</td>
+                </tr>
+            {/foreach}
+        </table>
+        
+        <h4>Schválené příspěvky</h4>
+        <hr>
+        <table class="table table-striped">
+            <tr>
+                <td>#</td>
+                <td>Titulek</td>
+                <td>Autor</td>
+                <td>Upraveno</td>
+                <td>Schváleno</td>
+            </tr>
+
+            {foreach $approvedNews as $article}
+                <tr>
+                    <td>{$article['id']}</td>
+                    <td><a n:href="News:showNews $article['id']">{$article['title']}</a></td>
+                    <td>{$article['authorName']}</td>
+                    <td>{$article['date']|date:'d. m. Y v H:i'}</td>
+                    <td>{if $article['approved'] == 0}<span class="glyphicon glyphicon-remove"></span>{else}<span class="glyphicon glyphicon-ok"></span>{/if}</td>
+                </tr>
+            {/foreach}
+        </table>
+    {/if}
+</div>
+{/block}

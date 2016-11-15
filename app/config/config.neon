@@ -1,0 +1,46 @@
+#
+# WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+# https://nette.org/security-warning
+#
+parameters:
+
+
+php:
+    date.timezone: Europe/Prague
+
+
+application:
+    errorPresenter: Error
+    mapping:
+    	*: App\*Module\Presenters\*Presenter
+
+
+session:
+    expiration: 14 days
+
+
+services:
+    - App\Model\UserManager
+    - App\Model\Menu
+    - App\Model\News
+    - App\Model\Users
+    - App\Model\Pages
+    - App\Model\SubPages
+    - App\Model\Sections
+    - App\Model\Gallery
+    - App\Forms\FormFactory
+    - App\Forms\SignFormFactory
+    - App\AdminModule\Forms\AddNewsFormFactory
+    - App\AdminModule\Forms\AddPageFormFactory
+    - App\AdminModule\Forms\AddSubPageFormFactory
+    - App\AdminModule\Forms\AddContentFormFactory
+    - App\AdminModule\Forms\AddUserFormFactory
+    - App\AdminModule\Forms\AddPhotosFormFactory
+    - App\AdminModule\Forms\AddFolderFormFactory
+    - App\AdminModule\Forms\EditNewsFormFactory
+    - App\AdminModule\Forms\EditPageFormFactory
+    - App\AdminModule\Forms\EditSubPageFormFactory
+    - App\AdminModule\Forms\EditContentFormFactory
+    - App\AdminModule\Forms\EditFolderFormFactory
+    - App\AdminModule\Forms\EditPhotoFormFactory
+    router: App\RouterFactory::createRouter

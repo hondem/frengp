@@ -1,0 +1,110 @@
+{block title}Podstránky{/block}
+{block content}
+<div class="container">
+    <div class="row x_title">
+        <div class="col-md-6">
+            <h3>Podstránky <small>Zde můžete přidávat a upravovat podstránky</small></h3>
+        </div>
+    </div>
+    
+    <div class="navbar navbar-default">
+        <ul class="nav navbar-nav">
+            <li><a n:href="SubPages:add"><i class="fa fa-plus"></i> Přidat podstránku</a></li>
+        </ul>
+    </div>
+    <br>
+    
+    <div class="input-group">
+        <span class="input-group-addon" id="search-addon"><span class="glyphicon glyphicon-search"></span></span>
+        <input type="text" class="form-control" placeholder="Hledat" aria-describedby="Hledat" id="search-input">
+    </div>
+    
+    <br>
+    {if $user->isInRole('admin')}
+        <h4>Neschválené úpravy</h4>
+        <hr>
+        <table class="table table-striped">
+            <tr>
+                <td>#</td>
+                <td>Název stránky</td>
+                <td>Datum poslední změny</td>
+                <td>Upravil</td>
+                <td>Editovat</td>
+            </tr>
+            <tr n:foreach="$editedPages as $page">
+                <td>{$page['subpageId']}</td>
+                <td><a n:href="SubPages:editedSubPage $page['subpageId']">{$page['subpageName']}</a></td>
+                <td>{$page['date']|date:'d. m. Y v H:i'}</td>
+                <td>{$page['editedByName']}</td>
+                <td><a n:href="SubPages:editedSubPage $page['id']"><span class="fa fa-pencil"></span></a></td>
+            </tr>
+        </table>
+        
+        <h4>Schválené stránky</h4>
+        <hr>
+    {/if}
+    
+    {snippet results_snippet}
+        <table class="table table-striped">
+            <tr>
+                <td>#</td>
+                <td>Název stránky</td>
+                <td>Datum poslední změny</td>
+                <td>Upravil</td>
+                <td>Editovat</td>
+            </tr>
+            {foreach $pages as $page}
+                <tr>
+                    <td>{$page['id']}</td>
+                    <td><a n:href="SubPages:editSubPage $page['id']">{$page['subpageName']}</a></td>
+                    <td>{$page['date']|date:'d. m. Y v H:i'}</td>
+                    <td>{$page['editedByName']}</td>
+                    <td><a n:href="SubPages:editSubPage $page['id']"><span class="fa fa-pencil"></span></a></td>
+                </tr>
+            {/foreach}
+        </table>
+    {/snippet}
+    
+    {if $paginator->getPageCount() > 1}
+        <nav class="text-center">
+            <ul class="pagination">
+                {if !$paginator->isFirst()}
+                <li>
+                    <a n:href="SubPages:default $paginator->getPage() - 1" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {/if}
+
+                {for $i=1; $i <= $paginator->getLastPage(); $i++}
+                    <li><a n:href="SubPages:default $i">{$i}</a></li>
+                {/for}
+
+                {if !$paginator->isLast()}
+                <li>
+                    <a n:href="SubPages:default $paginator->getPage() + 1" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {/if}
+            </ul>
+        </nav>
+    {/if}
+</div>
+{/block}
+
+{block scripts}
+<script>
+$(document).ready(function(){
+    var searchField = $('#search-input');
+    searchField.keyup(function(){
+        $.nette.ajax({
+            'url': {link search!},
+            'data': {
+                searchText: searchField.val()
+            }
+        });
+    });
+});
+</script>
+{/block}

@@ -1,0 +1,141 @@
+{**
+ * @param string   $basePath web base path
+ * @param array    $flashes  flash messages
+ *}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{ifset title}{include title|striptags} | {/ifset}Gymnázium a Střední průmyslová škola elektrotechniky a informatiky, Frenštát pod Radhoštěm</title>
+
+    <link href="{$basePath}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{$basePath}/css/style.css?ver=2" rel="stylesheet">
+    <link href="{$basePath}/css/lightbox.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&amp;subset=latin-ext" rel="stylesheet">
+    
+    {block head}{/block}
+</head>
+
+<body>
+    {foreach $flashes as $flash}
+        {if $flash->type == 'success'}
+            <div class="alert alert-success">{$flash->message}</div>
+        {elseif $flash->type == 'info'}
+            <div class="alert alert-info">{$flash->message}</div>
+        {elseif $flash->type == 'warning'}
+            <div class="alert alert-warning">{$flash->message}</div>
+        {elseif $flash->type == 'danger'}
+            <div class="alert alert-danger">{$flash->message}</div>
+        {/if}
+    {/foreach}
+    
+    <div class="container">
+		<div class="col-md-12 header">
+			<div class="col-md-6">
+				<h1 style="color:#000000 !important;font-size:20px !important;margin-top:30px !important;">Gymnázium a <br>Střední průmyslová škola elektrotechniky a informatiky, <br>Frenštát pod Radhoštěm, příspěvková organizace</h1>
+			</div>
+			<div class="col-md-6">
+				<div id="slider-photos" class="carousel slide" data-ride="carousel">
+					<div class="carousel-inner" role="listbox">
+						<div class="item active">
+							<img src="{$basePath}/images/slideshow/1.JPG">
+						</div>
+						<div class="item">
+							<img src="{$basePath}/images/slideshow/2.JPG">
+						</div>
+						<div class="item">
+							<img src="{$basePath}/images/slideshow/3.JPG">
+						</div>
+						<div class="item">
+							<img src="{$basePath}/images/slideshow/4.JPG">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+    
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <ul class="nav navbar-nav">
+                {foreach $menu as $row}
+                    {ifset $row['subMenu'][0]}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{$row['name']} <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                {foreach $row['subMenu'] as $item}
+                                    {if $item['params'] == ''}
+                                        <li><a n:href="$item['presenter']">{$item['name']}</a></li>
+                                    {else}
+                                        <li><a n:href="$item['presenter'] $item['params']">{$item['name']}</a></li>
+                                    {/if}
+                                    
+                                {/foreach}
+                            </ul>
+                        </li>
+                        
+                    {else}
+                        {if $row['params'] == ''}
+                            <li><a n:href="$row['presenter']">{$row['name']}</a></li>
+                        {else}
+                            <li><a n:href="$row['presenter'] $row['params']">{$row['name']}</a></li>
+                        {/if}
+                    {/ifset}
+                {/foreach}
+                <li><a n:href="SiteStructure:default">Mapa stránek</a></li>
+            </ul>
+        </nav>
+    </div>
+            
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                {include content}
+            </div>
+            <div class="col-md-2">
+                <a href="http://moje.meteo-pocasi.cz/GSPSEI/" target="_blank">Školní meteostanice</a><br>
+                <a href="http://www.estrava.cz/" target="_blank">E-strava</a><br>
+				<a href="http://portal.microsoftonline.com/" target="_blank">Školní email</a><br>
+				<a href="http://www.skolaonline.cz/" target="_blank">Katedra</a>
+                <hr>
+                <img src="{$basePath}/images/msk.png" class="img-responsive">
+                <br>
+                <p style="text-align:center;font-size:10px;">Gymnázium a 
+                Střední průmyslová škola elektrotechniky a informatiky, Frenštát pod Radhoštěm
+                je příspěvkovou organizací zřizovanou Moravskoslezským krajem</p>
+                <img src="{$basePath}/images/pomk.png" class="img-responsive">
+                <h4>Partneři</h4>
+                <hr>
+                <br>
+                <a href="http://www.kdejinde.cz/"><img src="{$basePath}/images/partners/kdejinde.jpg" class="img-responsive"></a><br>
+                <a href="http://www.vimproc.cz/"><img src="{$basePath}/images/partners/vimproc.png" class="img-responsive"></a><br>
+                <img src="{$basePath}/images/partners/pilotaz_bw.jpg" class="img-responsive"><br>
+                <img src="{$basePath}/images/partners/oez.png" class="img-responsive"><br>
+                <a href="http://www.cez.cz/"><img src="{$basePath}/images/partners/cez.jpg" class="img-responsive"></a><br>
+                <a href="http://www.continental-corporation.com/"><img src="{$basePath}/images/partners/continental.png" class="img-responsive"></a><br>
+                <a href="http://www.nxp.com/"><img src="{$basePath}/images/partners/nxp.png" class="img-responsive"></a><br>
+                <a href="http://www.onsemi.com/"><img src="{$basePath}/images/partners/onsemi.jpg" class="img-responsive"></a><br>
+                <a href="http://www.siemens.com/"><img src="{$basePath}/images/partners/siemens.png" class="img-responsive"></a>
+            </div>
+        </div>
+    </div>
+            
+    <div class="footer">
+        <div class="container">
+            <p class="copy">&copy; FrenGP</p>
+        </div>
+    </div>
+    
+    {block scripts}
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
+    <script src="{$basePath}/js/main.js"></script>
+    <script src="{$basePath}/js/bootstrap.js"></script>
+    <script src="{$basePath}/js/lightbox.min.js"></script>
+    <script src="{$basePath}/js/tableFix.js"></script>
+    {/block}
+</body>
+</html>

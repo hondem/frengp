@@ -1,0 +1,61 @@
+{block title}{$article->title|truncate:10}{/block}
+{block content}
+    <div class="container">
+        <div class="row x_title">
+            <div class="col-md-6">
+                <h3>Náhled novinky <small>Zde naleznete podrobnosti o novince</small></h3>
+            </div>
+        </div>
+
+        <div class="navbar navbar-default">
+            <ul class="nav navbar-nav">
+                <li><a n:href="News:default"><i class="fa fa-backward"></i> Zpět</a></li>
+                <li><a n:href="News:editNews $article->id"><i class="fa fa-pencil"></i> Upravit</a></li>
+                {ifset $editation}<li><a n:href="News:approveChanges $article->id"><i class="fa fa-check"></i> Schválit úpravy</a></li>{/ifset}
+                {if $user->isInRole('admin')}
+                    <li n:if="$article['approved'] == 0"><a n:href="News:approveNews $article->id"><i class="glyphicon glyphicon-ok"></i> Schválit</a></li>
+                    <li n:if="$article['approved'] == 1"><a n:href="News:unApproveNews $article->id"><i class="glyphicon glyphicon-remove"></i> Přidržet</a></li>
+                {/if}
+                <li n:if="$article['approved'] == 0 || $user->isInRole('admin')"><a n:href="News:deleteNews $article->id"><i class="fa fa-trash"></i> Odstranit</a></li>
+            </ul>
+        </div>
+        
+        {ifset $editation}
+            <div class="panel panel-default" style="margin-top:20px;">
+                <div class="panel-body">
+                    <h2>Upravená novinka</h2>
+                    <hr>
+                    <div class="col-md-8">
+                        <h3>{$editation->title}</h3>
+                        {$editation->content|noescape}
+                        <hr>
+                        <p>Naposledy upraveno: {$editation->date|date:'d. m. Y v H:i'}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                <h2>Publikovaná novinka</h2>
+        {/ifset}
+        <hr>
+        <div class="col-md-8 news-show">
+            {if $article['imageUrl'] != ''}
+                <div class="col-md-6">
+                    <img src="{$basePath}/images/upload/news/{$article['imageUrl']}" class="img-responsive">
+                </div>
+            {/if}
+            <div class="clearfix"></div>
+            <h3>{$article->title}</h3>
+            {$article->content|noescape}
+            <hr>
+            {foreach $pictures as $row}
+                <div class="col-md-2"><a href="{$basePath}/images/upload/news/{$row['imageUrl']}" data-lightbox="news-image"><img src="{$basePath}/images/upload/news/{$row['imageUrl']}" class="img-responsive"></a></div>
+            {/foreach}
+            <div class="clearfix"></div>
+            <hr>
+            <p>Naposledy upraveno: {$article->date|date:'d. m. Y v H:i'}</p>
+        </div>
+        {ifset $editation}</div></div>{/ifset}
+    </div>
+{/block}

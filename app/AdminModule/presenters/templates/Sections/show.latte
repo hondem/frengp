@@ -1,0 +1,34 @@
+{block title}{$section['name']}{/block}
+{block content}
+<div class="container">
+    <div class="row x_title">
+        <div class="col-md-6">
+            <h3>{$section['name']} <small>Zde můžete spravovat obsah rubrik</small></h3>
+        </div>
+    </div>
+        
+    <div class="navbar navbar-default">
+        <ul class="nav navbar-nav">
+            <li><a n:href="Sections:addPost $section['id']"><i class="fa fa-plus"></i> Přidat příspěvek</a></li>
+        </ul>
+    </div>
+    <br>
+    
+    <table class="table table-striped">
+        <tr>
+            <td>#</td>
+            <td>Titulek</td>
+            <td>Autor</td>
+            <td>Datum přidání</td>
+        </tr>
+        {foreach $sectionContent as $row}
+            <tr>
+                <td>{$row['id']}</td>
+                <td><a n:href="Sections:showPost $row['id']">{$row['title']}</a></td>
+                <td>{$row['authorName']}</td>
+                <td>{$row['date']|date:'d. m. Y v H:i'}</td>
+            </tr>
+        {/foreach}
+    </table>
+</div>
+{/block}

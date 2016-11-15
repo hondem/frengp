@@ -1,0 +1,21 @@
+{block title}{$post['title']|truncate:20}{/block}
+{block content}
+    {if $post['imageUrl'] != ''}
+        <div class="col-md-3"><a href="/images/upload/sections/{$post['imageUrl']}" data-lightbox="sections-image"><img src="/images/upload/sections/{$post['imageUrl']}" class="img-responsive"></a></div>
+    {/if}
+    
+    <div {if $post['imageUrl'] != ''}class="col-md-9"{else}class="col-md-12"{/if}>
+        <h2>{$post['title']}</h2>
+        {$post['content']|noescape}
+        <div class="clearfix"></div>
+        <hr>
+        {if count($pictures) >= 1}
+        {foreach $pictures as $row}
+            <div class="col-md-2">
+                <a href="{$basePath}/images/upload/sections/{$row['imageUrl']}" data-lightbox="sections-image"><img src="{$basePath}/images/upload/sections/{$row['imageUrl']}" class="img-responsive" style="margin-bottom:10px;"></a>
+            </div>
+        {/foreach}
+        {/if}
+    </div>
+    
+{/block}

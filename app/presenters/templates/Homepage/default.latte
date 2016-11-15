@@ -1,0 +1,73 @@
+{block content}
+    {foreach $pinnedNews as $row}
+        <div class="post well">
+            <div class="col-md-12">
+                {* <p>{$row['date']|date:'d. m. Y'}</p> *}
+                <a n:href="Homepage:showNews $row['id']"><h3>{$row['title']}</h3></a>
+            </div>
+            {if $row['imageUrl'] != ''}
+                <div class="col-md-3">
+                    {if $row['imageUrl'] != ''}<img src="{$basePath}/images/upload/news/{$row['imageUrl']}" class="img-full">{/if}
+                </div>
+                <div class="col-md-9">
+                    {$row['content']|noescape|striptags|truncate:450}
+                    <p><a n:href="Homepage:showNews $row['id']">Více</a></p>
+                </div>
+            {else}
+                <div class="col-md-12">
+                    {$row['content']|noescape|striptags|truncate:450}
+                    <p><a n:href="Homepage:showNews $row['id']">Více</a></p>
+                </div>
+            {/if}
+            <div class="clearfix"></div>
+        </div>
+    {/foreach}
+    
+    {foreach $unPinnedNews as $row}
+    <div class="post row">
+        <div class="col-md-12">
+            {* <p>{$row['date']|date:'d. m. Y'}</p> *}
+            <a n:href="Homepage:showNews $row['id']"><h3>{$row['title']}</h3></a>
+        </div>
+        {if $row['imageUrl'] != ''}
+            <div class="col-md-3">
+                {if $row['imageUrl'] != ''}<img src="{$basePath}/images/upload/news/{$row['imageUrl']}" class="img-full">{/if}
+            </div>
+            <div class="col-md-9">
+                {$row['content']|noescape|striptags|truncate:450}
+                <p><a n:href="Homepage:showNews $row['id']">Více</a></p>
+            </div>
+        {else}
+            <div class="col-md-12">
+                {$row['content']|noescape|striptags|truncate:450}
+                <p><a n:href="Homepage:showNews $row['id']">Více</a></p>
+            </div>
+        {/if}
+    </div>
+    <hr>
+    {/foreach}
+    
+    <nav class="text-center">
+        <ul class="pagination">
+            {if !$paginator->isFirst()}
+            <li>
+                <a n:href="Homepage:default $paginator->getPage() - 1" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {/if}
+            
+            {for $i=1; $i <= $paginator->getLastPage(); $i++}
+                <li><a n:href="Homepage:default $i">{$i}</a></li>
+            {/for}
+            
+            {if !$paginator->isLast()}
+            <li>
+                <a n:href="Homepage:default $paginator->getPage() + 1" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            {/if}
+        </ul>
+    </nav>
+{/block}

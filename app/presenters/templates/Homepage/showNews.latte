@@ -1,0 +1,24 @@
+{block title}{$news['title']|truncate:20}{/block}
+{block content}
+
+{if $news['imageUrl'] != ''}
+    <div class="col-md-3">
+        <a href="/images/upload/sections/{$news['imageUrl']}" data-lightbox="news-image"><img src="{$basePath}/images/upload/news/{$news['imageUrl']}" class="img-responsive"></a>
+    </div>
+{/if}
+
+<div {if $news['imageUrl'] != ''}class="col-md-9"{else}class="col-md-12"{/if}>
+    {* <p>{$news['date']|date:'d. m. Y'}</p> *}
+    <h2>{$news['title']}</h2>
+    {$news['content']|noescape}
+    <div class="clearfix"></div>
+    <hr>
+    {if count($pictures) >= 1}
+    {foreach $pictures as $row}
+        <div class="col-md-2">
+            <a href="{$basePath}/images/upload/news/{$row['imageUrl']}" data-lightbox="news-image"><img src="{$basePath}/images/upload/news/{$row['imageUrl']}" class="img-responsive" style="margin-bottom:10px;"></a>
+        </div>
+    {/foreach}
+    {/if}
+</div>
+{/block}

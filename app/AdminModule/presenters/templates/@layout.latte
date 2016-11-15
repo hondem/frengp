@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Meta, title, CSS, favicons, etc. -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>{ifset title}{include title} | {/ifset}FrenGP Admin</title>
+
+        <!-- Bootstrap -->
+        <link href="{$basePath}/AdminModule/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link href="{$basePath}/AdminModule/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <!-- iCheck -->
+        <link href="{$basePath}/AdminModule/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+        <!-- bootstrap-progressbar -->
+        <link href="{$basePath}/AdminModule/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+        <!-- jVectorMap -->
+        <link href="{$basePath}/AdminModule/css/maps/jquery-jvectormap-2.0.3.css" rel="stylesheet"/>
+
+        <!-- Custom Theme Style -->
+        <link href="{$basePath}/AdminModule/css/custom.css" rel="stylesheet">
+        
+        <link href="{$basePath}/css/lightbox.min.css" rel="stylesheet">
+    </head>
+
+    <body class="nav-md">
+        {foreach $flashes as $flash}
+            {if $flash->type == 'success'}
+                <div class="alert alert-success">{$flash->message}</div>
+            {elseif $flash->type == 'info'}
+                <div class="alert alert-info">{$flash->message}</div>
+            {elseif $flash->type == 'warning'}
+                <div class="alert alert-warning">{$flash->message}</div>
+            {elseif $flash->type == 'danger'}
+                <div class="alert alert-danger">{$flash->message}</div>
+            {/if}
+        {/foreach}
+
+        <div class="container body">
+            <div class="main_container">
+                <div class="col-md-3 left_col">
+                    <div class="left_col scroll-view">
+                        <div class="navbar nav_title" style="border: 0;">
+                            <a n:href="Homepage:default" class="site_title"><span>FrenGP Admin</span></a>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <!-- sidebar menu -->
+                        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                            <div class="menu_section">
+                                <ul class="nav side-menu">
+                                    <li>
+                                        <a n:href="Homepage:default"><i class="fa fa-home"></i> Domů</a>
+                                    </li>
+                                    <!--
+                                    <li class="disabled">
+                                        <a href="#"><i class="fa fa-bars"></i> Menu</a>
+                                    </li>
+                                    -->
+                                    <li>
+                                        <a n:href="News:default"><i class="fa fa-align-left"></i> Novinky</a>
+                                    </li>
+                                    <li>
+                                        <a n:href="Pages:default"><i class="fa fa-file-text"></i> Stránky</a>
+                                    </li>
+                                    <li>
+                                        <a n:href="SubPages:default"><i class="fa fa-columns"></i> Podstránky</a>
+                                    </li>
+                                    <li>
+                                        <a n:href="Gallery:default"><i class="fa fa-picture-o"></i> Galérie</a>
+                                    </li>
+                                    <li><a><i class="fa fa-bars"></i> Rubriky <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            {foreach $menuSections as $row}
+                                                <li><a n:href="Sections:show $row['id']">{$row['name']}</a>
+                                                </li>
+                                            {/foreach}
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a n:href="Users:default"><i class="fa fa-user"></i> Uživatelé</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <!-- /sidebar menu -->
+
+                        <!-- /menu footer buttons -->
+                        <div class="sidebar-footer hidden-small">
+                            <a n:href=":Homepage:default" data-toggle="tooltip" data-placement="top" title="Zpět na stránky">
+                                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                            </a>
+
+                            <a n:href=":Sign:out" data-toggle="tooltip" data-placement="top" title="Odhlásit se">
+                                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                            </a>
+                        </div>
+                        <!-- /menu footer buttons -->
+                    </div>
+                </div>
+
+                <!-- top navigation -->
+                <div class="top_nav">
+
+                    <div class="nav_menu">
+                        <nav class="" role="navigation">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="">
+                                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        <span class="fa fa-sign-out"></span>
+                                        <span class=" fa fa-angle-down"></span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                        <li><a n:href=":Sign:out"><i class="fa fa-sign-out pull-right"></i> Odhlásit se</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <!-- /top navigation -->
+
+
+                <!-- page content -->
+                <div class="right_col" role="main">
+                    {include content}
+                </div>
+                <!-- /page content -->
+
+                <!-- footer content -->
+                <footer>
+                    <div class="pull-right">
+                        &copy; FrenGP - Vytvořil Jan Demel
+                    </div>
+                    <div class="clearfix"></div>
+                </footer>
+                <!-- /footer content -->
+            </div>
+        </div>
+
+        <!-- jQuery -->
+        <script src="{$basePath}/AdminModule/vendors/jquery/dist/jquery.min.js"></script>
+        <script src="//nette.github.io/resources/js/netteForms.min.js"></script>
+        <script src="{$basePath}/js/nette.ajax.js"></script>
+        <script src="{$basePath}/js/nette.ajax.init.js"></script>
+        <!-- Bootstrap -->
+        <script src="{$basePath}/AdminModule/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- FastClick -->
+        <script src="{$basePath}/AdminModule/vendors/fastclick/lib/fastclick.js"></script>
+        <!-- NProgress -->
+        <script src="{$basePath}/AdminModule/vendors/nprogress/nprogress.js"></script>
+        <!-- FullCalendar -->
+        <script src="{$basePath}/AdminModule/vendors/moment/min/moment.min.js"></script>
+        <script src="{$basePath}/AdminModule/vendors/fullcalendar/dist/fullcalendar.min.js"></script>
+        <script src="{$basePath}/AdminModule/js/custom.js"></script>
+        
+        
+        <script src="{$basePath}/js/tinymce/tinymce.min.js"></script>
+        <script src="{$basePath}/js/tinymce/langs/cs.js"></script>
+        <script src="{$basePath}/js/lightbox.min.js"></script>
+        <script>
+            tinymce.init({
+                selector: 'textarea',
+                plugins: [
+                  'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+                  'searchreplace wordcount visualblocks visualchars code fullscreen',
+                  'insertdatetime media nonbreaking save table contextmenu directionality',
+                  'emoticons template paste textcolor colorpicker textpattern imagetools responsivefilemanager'
+                ],
+                toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+                toolbar2: 'print preview media | forecolor backcolor emoticons | responsivefilemanager',
+                image_advtab: true,
+                relative_urls: false,
+                templates: [
+                  { title: 'Test template 1', content: 'Test 1' },
+                  { title: 'Test template 2', content: 'Test 2' }
+                ],
+                external_filemanager_path: {$basePath} + '/filemanager/',
+                filemanager_title:'Filemanager',
+                external_plugins: {'filemanager' : {$basePath} + '/js/tinymce/plugins/responsivefilemanager/plugin.min.js'}
+            });
+        </script>
+        
+        {ifset scripts}{include scripts}{/ifset}
+    </body>
+</html>

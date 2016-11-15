@@ -1,0 +1,42 @@
+{block title}{$section['name']}{/block}
+{block content}
+    {foreach $posts as $row}
+    <div class="post row">
+        <div n:if="$row['imageUrl'] != ''" class="col-md-3">
+            <a href="/images/upload/sections/{$row['imageUrl']}" data-lightbox="descriptionImg"><img src="/images/upload/sections/{$row['imageUrl']}" class="img-responsive"></a>
+        </div>
+        <div {if $row['imageUrl'] != ''}class="col-md-9"{else}class="col-md-12"{/if}>
+            <a n:href="Sections:showPost $row['id']"><h3>{$row['title']}</h3></a>
+            {$row['content']|noescape|striptags|truncate:450}
+            <p><a n:href="Sections:showPost $row['id']" style="color:#3d87ff;">Více</a></p>
+        </div>
+    </div>
+    <hr>
+    {/foreach}
+    
+    {if $paginator->getPageCount() > 1}
+        <nav class="text-center">
+            <ul class="pagination">
+                {if !$paginator->isFirst()}
+                <li>
+                    <a n:href="Sections:show $section['id'], $paginator->getPage() - 1" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {/if}
+
+                {for $i=1; $i <= $paginator->getLastPage(); $i++}
+                    <li><a n:href="Sections:show $section['id'], $i">{$i}</a></li>
+                {/for}
+
+                {if !$paginator->isLast()}
+                <li>
+                    <a n:href="Sections:show $section['id'], $paginator->getPage() + 1" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {/if}
+            </ul>
+        </nav>
+    {/if}
+{/block}

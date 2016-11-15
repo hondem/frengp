@@ -1,0 +1,38 @@
+{block title}Přidat novinku{/block}
+{block content}
+    <div class="container">
+        <div class="col-md-8">
+            <form n:name="addNewsForm">
+                <div class="form-group">
+                    <label for="title">Titulek</label>
+                    <input n:name="title" type="text" class="form-control" id="title" placeholder="Titulek">
+                </div>
+
+                <div class="form-group">
+                    <label for="content">Obsah</label>
+                    <textarea n:name="content" class="form-control" id="content" placeholder="Obsah novinky" rows="20"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="newsPicture">Obrázek novinky</label>
+                    <input n:name="newsPicture" type="file" id="newsPicture">
+                    <p class="help-block">Soubor musí být obrázek (.jpg, .gif, .png ...)<br>Maximální velikost souboru je 1024kB</p>
+                </div>
+                
+                    <div class="form-group">
+                    <label for="pictures">Ostatní obrázky</label>
+                    <input n:name="pictures" type="file" id="pictures">
+                    <p class="help-block">Soubor musí být obrázek (.jpg, .gif, .png ...)<br>Maximální velikost souboru je 1024kB</p>
+                </div>
+				
+                <div class="checkbox">
+                    <label>
+                        <input n:name="important" type="checkbox"> Důležité oznámení
+                    </label>
+                </div>
+
+                <button n:name="send" type="submit" class="btn btn-default">Odeslat</button>
+            </form>
+        </div>
+    </div>
+{/block}

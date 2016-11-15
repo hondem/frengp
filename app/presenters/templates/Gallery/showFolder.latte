@@ -1,0 +1,15 @@
+{block title}{$folder['name']}{/block}
+{block content}
+<h2>{$folder['name']} <a n:href="Gallery:showGallery $folder['galleryId']" class="btn btn-default">Zpět</a></h2>
+<hr>
+{foreach $images as $row}
+    <div class="col-md-3">
+        <div class="folder-content">
+            <a href="{$basePath}{$row['url']}" data-lightbox="{$folder['name']}" data-title="{$row['description']}">
+                <img src="{$basePath}{$row['thumbUrl']}" class="img-responsive">
+            </a>
+        </div>
+    </div>
+{/foreach}
+
+{/block}

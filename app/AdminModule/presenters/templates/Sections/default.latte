@@ -1,0 +1,25 @@
+{block title}Rubriky{/block}
+{block content}
+<div class="container">
+    <div class="row x_title">
+        <div class="col-md-6">
+            <h3>Rubriky <small>Zde naleznete přehled rubrik</small></h3>
+        </div>
+    </div>
+    
+    <table class="table table-striped">
+        <tr>
+            <td>#</td>
+            <td>Název rubriky</td>
+            <td>Počet příspěvků</td>
+        </tr>
+        {foreach $sections as $row}
+            <tr>
+                <td>{$row['id']}</td>
+                <td><a n:href="Sections:show $row['id']">{$row['name']}</a></td>
+                <td>{$row['articlesCount']}</td>
+            </tr>
+        {/foreach}
+    </table>
+</div>
+{/block}

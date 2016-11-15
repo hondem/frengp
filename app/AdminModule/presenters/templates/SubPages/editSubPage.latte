@@ -1,0 +1,19 @@
+{block title}Editovat stránku{/block}
+{block content}
+<div class="container">
+    <form n:name="editSubPageForm">
+        <div class="form-group">
+            <label for="title">Název stránky</label>
+            <input n:name="subpageName" type="text" class="form-control" id="title" placeholder="Název stránky">
+        </div>
+
+        <div class="form-group">
+            <label for="content">Tělo stránky</label>
+            <textarea n:name="content" class="form-control" id="content" placeholder="Tělo stránky" rows="20"></textarea>
+        </div>
+
+        <button n:name="send" type="submit" class="btn btn-default">Uložit</button>
+    </form>
+</div>
+{/block}
+

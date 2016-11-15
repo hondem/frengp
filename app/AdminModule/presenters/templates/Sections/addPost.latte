@@ -1,0 +1,30 @@
+{block title}Přidat příspěvek{/block}
+{block content}
+    <div class="container">
+        <form n:name="addContentForm">
+            <div class="form-group">
+                <label for="title">Titulek</label>
+                <input n:name="title" type="text" class="form-control" id="title" placeholder="Titulek">
+            </div>
+
+            <div class="form-group">
+                <label for="content">Obsah</label>
+                <textarea n:name="content" class="form-control" id="content" placeholder="Obsah novinky" rows="20"></textarea>
+            </div>
+			
+            <div class="form-group">
+                <label for="postPicture">Obrázek novinky</label>
+                <input n:name="image" class="form-control" id="postPicture">
+                <p class="help-block">Soubor musí být obrázek (.jpg, .gif, .png ...)<br>Maximální velikost souboru je 1024kB</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="otherPictures">Ostatní obrázky</label>
+                <input n:name="pictures" class="form-control" id="otherPictures">
+                <p class="help-block">Soubor musí být obrázek (.jpg, .gif, .png ...)<br>Maximální velikost souboru je 1024kB</p>
+            </div>
+
+            <button n:name="send" type="submit" class="btn btn-default">Odeslat</button>
+        </form>
+    </div>
+{/block}
