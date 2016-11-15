@@ -9,3 +9,4 @@ www/source/*
 www/thumbs/*
 www/images/upload/*
 session/*
+push.sh
