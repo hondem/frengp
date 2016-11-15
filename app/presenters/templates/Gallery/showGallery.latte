@@ -11,14 +11,14 @@
                 <a n:href="Gallery:showFolder $row['id']">
                     <img src="{$basePath}{$row['thumb']['thumbUrl']}" class="img-responsive folder-image">
                     <div class="folder-description text-center">
-                        <h3>{$row['name']}</h3>
+                        <h5>{$row['name']}</h5>
                     </div>
                 </a>
             </div>
         </div>
-		{if $counter % 4 == 0}
-			<div class="clearfix"></div>
-		{/if}
+        {if $counter % 4 == 0}
+                <div class="clearfix"></div>
+        {/if}
     {/if}
 {/foreach}
 
