@@ -83,7 +83,11 @@
                             <ul class="dropdown-menu">
                                 {foreach $row['subMenu'] as $item}
                                     {if $item['params'] == ''}
-                                        <li><a n:href="$item['presenter']">{$item['name']}</a></li>
+                                        {if $item['isUrl'] == 1}
+                                            <li><a href="{$item['presenter']}">{$item['name']}</a></li>
+                                        {else}
+                                            <li><a n:href="$item['presenter']">{$item['name']}</a></li>
+                                        {/if}
                                     {else}
                                         <li><a n:href="$item['presenter'] $item['params']">{$item['name']}</a></li>
                                     {/if}
