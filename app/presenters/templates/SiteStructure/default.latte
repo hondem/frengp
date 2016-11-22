@@ -12,7 +12,11 @@
         <ul>
             {foreach $row['subMenu'] as $subMenu}
                 {if $subMenu['params'] == ''}
-                    <li><a n:href="$subMenu['presenter']">{$subMenu['name']}</li>
+                    {if $subMenu['isUrl'] == 1}
+                        <li><a href="{$subMenu['presenter']}">{$subMenu['name']}</li>
+                    {else}
+                        <li><a n:href="$subMenu['presenter']">{$subMenu['name']}</li>
+                    {/if}
                 {else}
                     <li><a n:href="$subMenu['presenter'] $subMenu['params']">{$subMenu['name']}</li>
                 {/if}
