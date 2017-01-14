@@ -12,7 +12,7 @@ foreach($scan as $file){
 
 $outputstring = "";
 foreach($files as $file){
-    $outputstring .= "<p><a title='" . $file . "' href='" . $dir . $file . "'>" . $file . "</a></p>";
+    $outputstring .= "<p><a title='" . $file . "' href='/" . $dir . $file . "'>" . $file . "</a></p>";
 }
 
 print_r(htmlspecialchars($outputstring));
