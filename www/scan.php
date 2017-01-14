@@ -1,6 +1,6 @@
 <?php
 
-$dir = "source/DOD_G_2016/";
+$dir = $_GET['dir'];
 $scan = scandir($dir);
 $files = [];
 
@@ -14,5 +14,6 @@ $outputstring = "";
 foreach($files as $file){
     $outputstring .= "<p><a title='" . $file . "' href='" . $dir . $file . "'>" . $file . "</a></p>";
 }
+
 print_r(htmlspecialchars($outputstring));
 ?>
