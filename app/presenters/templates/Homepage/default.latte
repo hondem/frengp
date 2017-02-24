@@ -1,4 +1,6 @@
 {block content}
+    <div class="alert alert-danger" role="alert">Upozorňujeme zákonné zástupce žáků, že přihlášky ke vzdělávání na střední škole se odevzdávají do 1. března 2017.</div>
+
     {foreach $pinnedNews as $row}
         <div class="post well">
             <div class="col-md-12">
@@ -22,7 +24,7 @@
             <div class="clearfix"></div>
         </div>
     {/foreach}
-    
+
     {foreach $unPinnedNews as $row}
     <div class="post row">
         <div class="col-md-12">
@@ -46,7 +48,7 @@
     </div>
     <hr>
     {/foreach}
-    
+
     <nav class="text-center">
         <ul class="pagination">
             {if !$paginator->isFirst()}
@@ -56,11 +58,11 @@
                 </a>
             </li>
             {/if}
-            
+
             {for $i=1; $i <= $paginator->getLastPage(); $i++}
                 <li><a n:href="Homepage:default $i">{$i}</a></li>
             {/for}
-            
+
             {if !$paginator->isLast()}
             <li>
                 <a n:href="Homepage:default $paginator->getPage() + 1" aria-label="Next">
