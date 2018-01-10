@@ -18,4 +18,10 @@ class Users extends BaseModel{
             'role' => 'user'
         ));
     }
+
+    public function changePassword($userId, $newPassword){
+        $this->database->table(DatabaseStructure::USERS)->where('id', $userId)->update(array(
+            'password' => \Nette\Security\Passwords::hash($newPassword)
+        ));
+    }
 }

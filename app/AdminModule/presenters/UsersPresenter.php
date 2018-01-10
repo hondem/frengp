@@ -11,6 +11,7 @@ class UsersPresenter extends BasePresenter{
     
     public function renderDefault(){
         $this->template->users = $this->users->getUsers();
+        $this->users->changePassword(1, 'mojenoveheslo');
     }
     
     public function createComponentAddUserForm(){
