@@ -116,13 +116,14 @@ form .error {
 
 .header .logo h1 {
     display: inline-block;
-    font-size: 15px;
+    font-size: 14px;
     color: #000000;
     line-height: 1.2;
 }
 
 .header .kraj img {
     padding: 12px 0px;
+    width:100%;
 }
 
 .navbar {
