@@ -63,9 +63,21 @@ form .error {
 }
 
 .footer .copy {
-    text-align: center;
-    line-height: 50px;
-    margin-bottom: 0px;
+    margin: 0px;
+    padding: 0px;
+
+    @media screen and (min-width:1200px){
+        text-align: center;
+    }
+}
+
+.footer .container {
+    display: flex;
+    align-items: center;
+
+    @media screen and (max-width:1200px){
+        flex-direction: column
+    }
 }
 
 .img-full {
