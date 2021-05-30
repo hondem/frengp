@@ -50,9 +50,6 @@
                     </div>
                 </div>
                 <div class="kraj col-md-2 hidden-sm hidden-xs">
-                    <img src="{$basePath}/images/logo_msk_20_let.png" alt="Logo Moravskoslezského kraje 20 let" class="pull-right">
-                </div>
-                <div class="kraj col-md-2 hidden-sm hidden-xs">
                     <img src="{$basePath}/images/msk_logo.png" alt="Logo Moravskoslezského kraje" class="pull-right">
                 </div>
             </div>
@@ -92,7 +89,11 @@
 
                             {else}
                                 {if $row['params'] == ''}
-                                    <li><a n:href="$row['presenter']">{$row['name']}</a></li>
+                                    {if $row['isUrl'] == 1}
+                                        <li><a href="{$row['presenter']}">{$row['name']}</a></li>
+                                    {else}
+                                        <li><a n:href="$row['presenter']">{$row['name']}</a></li>
+                                    {/if}
                                 {else}
                                     <li><a n:href="$row['presenter'] $row['params']">{$row['name']}</a></li>
                                 {/if}
